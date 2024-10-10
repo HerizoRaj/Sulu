@@ -1,0 +1,39 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+    <!-- Div externe avec l'image de fond -->
+    <div class="background-container"></div>
+
+    <!-- Contenu principal -->
+    <div class="content container mt-5">
+        <!-- Formulaire de connexion et inscription -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-container">
+                    <h2 class="header-text">{{ content.login_title }}</h2> <!-- Titre de la section Connexion -->
+                    <form>
+                        <div class="form-group">
+                            <label for="email">E-mail*</label>
+                            <input type="email" class="form-control" id="email" placeholder="Entrez votre email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Mot de passe*</label>
+                            <input type="password" class="form-control" id="password" placeholder="Entrez votre mot de passe" required>
+                        </div>
+                        <a href="#">J'ai oublié mon mot de passe</a>
+                        <button type="submit" class="btn btn-custom btn-block mt-4">Me connecter</button>
+                        <small class="form-text text-muted">*Champs obligatoires</small>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-container">
+                    <h2 class="header-text">{{ content.signup_title }}</h2> <!-- Titre de la section Inscription -->
+                    <p>{{ content.signup_description|raw }}</p> <!-- Description de l'inscription -->
+                    <button class="btn btn-custom btn-block mt-4">Créer mon compte</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

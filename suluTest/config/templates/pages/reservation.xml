@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+<template xmlns="http://schemas.sulu.io/template/template"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://schemas.sulu.io/template/template
+          http://schemas.sulu.io/template/template-1.0.xsd">
+    <key>reservation</key>
+    <view>pages/reservation</view>
+    <controller>App\Controller\ReservationController::reservations</controller>
+    <meta>
+        <title>Réservation</title>
+    </meta>
+    <properties>
+        <!-- Balise sulu.rlp nécessaire pour la gestion des URLs -->
+        <property name="url" type="resource_locator">
+            <meta>
+                <title>URL</title>
+            </meta>
+            <tag name="sulu.rlp"/>
+        </property>
+
+        <property name="title" type="text_line">
+            <meta>
+                <title>Titre de la page</title>
+            </meta>
+        </property>
+    </properties>
+</template>

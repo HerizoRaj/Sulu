@@ -1,0 +1,49 @@
+<?xml version="1.0" ?>
+<template xmlns="http://schemas.sulu.io/template/template"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://schemas.sulu.io/template/template
+          http://schemas.sulu.io/template/template-1.0.xsd">
+    <key>login</key>
+    <view>pages/login</view>
+    <controller>Sulu\Bundle\WebsiteBundle\Controller\DefaultController::indexAction</controller>
+    <meta>
+        <title>Login</title>
+    </meta>
+    <properties>
+        <!-- Gestion de l'URL -->
+        <property name="url" type="resource_locator">
+            <meta>
+                <title>URL</title>
+            </meta>
+            <tag name="sulu.rlp"/>
+        </property>
+
+        <!-- Titre de la page -->
+        <property name="title" type="text_line">
+            <meta>
+                <title>Titre de la page</title>
+            </meta>
+        </property>
+
+        <!-- Texte de l'entête Connexion -->
+        <property name="login_title" type="text_line">
+            <meta>
+                <title>Titre de la section Connexion</title>
+            </meta>
+        </property>
+
+        <!-- Texte de l'entête Inscription -->
+        <property name="signup_title" type="text_line">
+            <meta>
+                <title>Titre de la section Inscription</title>
+            </meta>
+        </property>
+
+        <!-- Texte de description pour l'inscription -->
+        <property name="signup_description" type="text_editor">
+            <meta>
+                <title>Description de l'inscription</title>
+            </meta>
+        </property>
+    </properties>
+</template>

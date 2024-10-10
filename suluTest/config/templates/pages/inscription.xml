@@ -1,0 +1,126 @@
+<?xml version="1.0" ?>
+<template xmlns="http://schemas.sulu.io/template/template"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://schemas.sulu.io/template/template
+          http://schemas.sulu.io/template/template-1.0.xsd">
+    <key>inscription</key>
+    <view>pages/inscription</view>
+    <controller>App\Controller\ClientController::inscription</controller>
+    <meta>
+        <title>Inscription</title>
+    </meta>
+    <properties>
+        <!-- Balise sulu.rlp nécessaire pour la gestion des URLs -->
+        <property name="url" type="resource_locator">
+            <meta>
+                <title>URL</title>
+            </meta>
+            <tag name="sulu.rlp"/>
+        </property>
+
+        <property name="title" type="text_line">
+            <meta>
+                <title>Titre de la page</title>
+            </meta>
+        </property>
+
+        <!-- Prénom -->
+        <property name="firstname" type="text_line">
+            <meta>
+                <title>Prénom</title>
+            </meta>
+        </property>
+
+        <!-- Nom -->
+        <property name="lastname" type="text_line">
+            <meta>
+                <title>Nom</title>
+            </meta>
+        </property>
+
+        <!-- E-mail -->
+        <property name="email" type="email">
+            <meta>
+                <title>E-mail</title>
+            </meta>
+        </property>
+
+        <!-- Téléphone -->
+        <property name="phone" type="text_line">
+            <meta>
+                <title>Téléphone</title>
+            </meta>
+        </property>
+
+        <!-- Mot de passe -->
+        <property name="password" type="text_line">
+            <meta>
+                <title>Mot de passe</title>
+            </meta>
+        </property>
+
+        <!-- Confirmation du mot de passe -->
+        <property name="confirm_password" type="text_line">
+            <meta>
+                <title>Confirmation du mot de passe</title>
+            </meta>
+        </property>
+
+        <!-- Adresse 1 -->
+        <property name="address1" type="text_line">
+            <meta>
+                <title>Adresse 1</title>
+            </meta>
+        </property>
+
+        <!-- Adresse 2 -->
+        <property name="address2" type="text_line">
+            <meta>
+                <title>Adresse 2</title>
+            </meta>
+        </property>
+
+        <!-- Ville -->
+        <property name="city" type="text_line">
+            <meta>
+                <title>Ville</title>
+            </meta>
+        </property>
+
+        <!-- Région -->
+        <property name="region" type="text_line">
+            <meta>
+                <title>Région</title>
+            </meta>
+        </property>
+
+        <!-- Code postal -->
+        <property name="zipcode" type="text_line">
+            <meta>
+                <title>Code postal</title>
+            </meta>
+        </property>
+
+        <!-- Pays -->
+        <property name="country" type="text_line">
+            <meta>
+                <title>Pays</title>
+            </meta>
+        </property>
+
+        <!-- Raison sociale -->
+        <property name="raison_social" type="text_line">
+            <meta>
+                <title>Raison sociale</title>
+            </meta>
+        </property>
+
+        <!-- Consentement -->
+        <property name="consent" type="checkbox">
+            <meta>
+                <title>Consentement aux communications</title>
+            </meta>
+        </property>
+
+    </properties>
+</template>

@@ -1,0 +1,118 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+    <!-- Div externe avec l'image de fond -->
+    <div class="background-container"></div>
+
+    <!-- Formulaire d'inscription -->
+    <div class="form-container">
+        <div class="form-header">
+            <img src="logo.png" alt="Panda Coworking" style="width: 120px;">
+            <h2>Inscription</h2>
+        </div>
+
+        <!-- Choix de genre -->
+        <div class="radio-group">
+            <label><input type="radio" name="gender" value="Madame"> Madame</label>
+            <label><input type="radio" name="gender" value="Monsieur"> Monsieur</label>
+        </div>
+
+        <!-- Formulaire -->
+        <form action="{{ path('app_inscription_client') }}">
+            <div class="form-row">
+                <div class="form-group">
+                    {{ form_label(inscriptionForm.prenom) }}
+                    {{ form_widget(inscriptionForm.prenom) }}
+                    <span class="text-danger text-left" data-page="1">{{form_errors(inscriptionForm.prenom) }}</span>
+                    <!--label for="firstname">Prénom*</label-->
+                    <!--input type="text" id="firstname" name="firstname" class="form-control" placeholder="Prénom" required-->
+                </div>
+                <div class="form-group">
+                    {{ form_label(inscriptionForm.nom) }}
+                    {{ form_widget(inscriptionForm.nom) }}
+                    <span class="text-danger text-left" data-page="1">{{form_errors(inscriptionForm.nom) }}</span>
+                    <!--label for="lastname">Nom*</label>
+                    <input type="text" id="lastname" name="lastname" class="form-control" placeholder="Nom" required-->
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    {{ form_label(inscriptionForm.emailPrincipal) }}
+                    {{ form_widget(inscriptionForm.emailPrincipal) }}
+                    <span class="text-danger text-left" data-page="1">{{form_errors(inscriptionForm.emailPrincipal) }}</span>
+                </div>
+                <div class="form-group">
+                    {{ form_label(inscriptionForm.emailFacturation) }}
+                    {{ form_widget(inscriptionForm.emailFacturation) }}
+                    <span class="text-danger text-left" data-page="1">{{form_errors(inscriptionForm.emailFacturation) }}</span>
+                </div>
+
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="password">Mot de passe*</label>
+                    <input type="password" id="password" name="password" class="form-control" placeholder="Mot de passe" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirm_password">Confirmation du mot de passe*</label>
+                    <input type="password" id="confirm_password" name="confirm_password" class="form-control" placeholder="Confirmez votre mot de passe" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    {{ form_label(inscriptionForm.adresse) }}
+                    {{ form_widget(inscriptionForm.adresse) }}
+                    <span class="text-danger text-left" data-page="1">{{form_errors(inscriptionForm.adresse) }}</span>
+                </div>
+                <div class="form-group">
+                    {{form_label(inscriptionForm.tel)}}
+                    {{form_widget(inscriptionForm.tel)}}
+                    <span class="text-danger text-left" data-page="1">{{form_errors(inscriptionForm.tel) }}</span>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    {{ form_label(inscriptionForm.ville) }}
+                    {{ form_widget(inscriptionForm.ville) }}
+                    <span class="text-danger text-left" data-page="1">{{form_errors(inscriptionForm.ville) }}</span>
+                </div>
+                <div class="form-group">
+                    <label for="region">Région*</label>
+                    <input type="text" id="region" name="region" class="form-control" placeholder="Région" required>
+                    {{ form_label(inscriptionForm.codePostal) }}
+                    {{ form_widget(inscriptionForm.codePostal) }}
+                    <span class="text-danger text-left" data-page="1">{{form_errors(inscriptionForm.codePostal) }}</span>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    {{ form_label(inscriptionForm.pays) }}
+                    {{ form_widget(inscriptionForm.pays) }}
+                    <span class="text-danger text-left" data-page="1">{{form_errors(inscriptionForm.pays) }}</span>
+                </div>
+                <div class="form-group">
+                    {{ form_label(inscriptionForm.raisonSociale) }}
+                    {{ form_widget(inscriptionForm.raisonSociale) }}
+                    <span class="text-danger text-left" data-page="1">{{form_errors(inscriptionForm.raisonSociale) }}</span>
+                </div>
+            </div>
+
+            <!-- Checkbox -->
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" name="consent" required>
+                    Je souhaite recevoir les offres et communications Panda Coworking
+                </label>
+            </div>
+
+            <!-- Bouton d'inscription -->
+            <button type="submit" class="btn btn-custom">CRÉER MON COMPTE</button>
+
+            <p class="small-text">*Champs obligatoires</p>
+        </form>
+    </div>
+{% endblock %}

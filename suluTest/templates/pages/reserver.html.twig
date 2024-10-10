@@ -1,0 +1,36 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+    <div class="container">
+        <!-- Logo Panda -->
+        <div class="logo">
+            <img src="path-to-your-logo.png" alt="Panda Coworking">
+        </div>
+
+        <!-- Titre principal -->
+        <h1>{{ content.title }}</h1>
+
+        <!-- Sous-titre -->
+        <p class="subtitle">{{ content.subtitle|raw }}</p>
+
+        <!-- Liste des fonctionnalités -->
+        <div class="features">
+            {% for feature in content.features %}
+                <div class="feature">
+                    <span>
+                        {% if feature.icon is defined and feature.icon %}
+                            <img src="{{ feature.icon[0].url }}" width="30px" height="30px" alt="{{ feature.text }}">
+                        {% endif %}
+                        {{ feature.text }}
+                    </span>
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- Boutons -->
+        <div class="buttons">
+            <a href="#" class="back">{{ content.back_button }}</a>
+            <a href="{{ path('app_reservations') }}" class="reserve">{{ content.reserve_button }}</a>
+        </div>
+    </div>
+{% endblock %}

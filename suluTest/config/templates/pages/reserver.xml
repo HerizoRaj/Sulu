@@ -1,0 +1,75 @@
+<?xml version="1.0" ?>
+<template xmlns="http://schemas.sulu.io/template/template"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://schemas.sulu.io/template/template
+          http://schemas.sulu.io/template/template-1.0.xsd">
+    <key>reserver</key>
+    <view>pages/reserver</view>
+    <controller>App\Controller\ReservationController::reserver</controller>
+    <meta>
+        <title>Réserver votre place dès maintenant</title>
+    </meta>
+    <properties>
+        <!-- Balise sulu.rlp nécessaire pour la gestion des URLs -->
+        <property name="url" type="resource_locator">
+            <meta>
+                <title>URL</title>
+            </meta>
+            <tag name="sulu.rlp"/>
+        </property>
+
+        <!-- Titre de la page -->
+        <property name="title" type="text_line">
+            <meta>
+                <title>Titre de la page</title>
+            </meta>
+        </property>
+
+        <!-- Sous-titre -->
+        <property name="subtitle" type="text_editor">
+            <meta>
+                <title>Sous-titre de la page</title>
+            </meta>
+        </property>
+
+        <!-- Liste des fonctionnalités -->
+        <property name="features" type="block">
+            <meta>
+                <title>Fonctionnalités</title>
+            </meta>
+            <types>
+                <type name="feature">
+                    <meta>
+                        <title>Fonctionnalité</title>
+                    </meta>
+                    <properties>
+                        <property name="icon" type="media_selection">
+                            <meta>
+                                <title>Icône</title>
+                            </meta>
+                        </property>
+                        <property name="text" type="text_line">
+                            <meta>
+                                <title>Texte de la fonctionnalité</title>
+                            </meta>
+                        </property>
+                    </properties>
+                </type>
+            </types>
+        </property>
+
+        <!-- Bouton de retour -->
+        <property name="back_button" type="text_line">
+            <meta>
+                <title>Texte du bouton retour</title>
+            </meta>
+        </property>
+
+        <!-- Bouton de réservation -->
+        <property name="reserve_button" type="text_line">
+            <meta>
+                <title>Texte du bouton réservation</title>
+            </meta>
+        </property>
+    </properties>
+</template>

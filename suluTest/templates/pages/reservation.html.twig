@@ -1,0 +1,98 @@
+{# templates/pages/reservation.html.twig #}
+{% extends "base.html.twig" %}
+
+{% block content %}
+    <!-- Lien de retour en haut à gauche -->
+    <div class="container">
+        <a href="{{ path('app_reserver') }}" class="btn btn-link">&larr; Retour à l'étape précédente</a>
+
+        <!-- Barre de progression -->
+        <div class="progress mt-3">
+            <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">Choix de la formule</div>
+        </div>
+
+        <!-- Contenu de la page avec des blocs côte à côte -->
+        <div class="row mt-4">
+            <!-- Section gauche - Choisir une formule -->
+            <div class="col-md-7">
+                <h2>Choisissez vos réservations :</h2>
+                <!-- Blocs d'options -->
+                <div class="card mb-3">
+                    <div class="card-body d-flex justify-content-between">
+                        <div>
+                            <img src="url_vers_image_demi_journee" alt="Demi-journée" style="height: 50px;">
+                            <h5 class="card-title">Demi-journée - Poste de travail en coworking</h5>
+                            <p class="card-text">Tarif : 25 €</p>
+                        </div>
+                        <div>
+                            <input type="number" min="0" class="form-control" value="1">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Autres blocs similaires -->
+                <div class="card mb-3">
+                    <div class="card-body d-flex justify-content-between">
+                        <div>
+                            <img src="url_vers_image_journee" alt="Journée" style="height: 50px;">
+                            <h5 class="card-title">Journée - Poste de travail en coworking</h5>
+                            <p class="card-text">Tarif : 0 €</p>
+                        </div>
+                        <div>
+                            <input type="number" min="0" class="form-control" value="0">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3">
+                    <div class="card-body d-flex justify-content-between">
+                        <div>
+                            <img src="url_vers_image_mois" alt="Mois" style="height: 50px;">
+                            <h5 class="card-title">Mois - Poste de travail en coworking</h5>
+                            <p class="card-text">Tarif : 0 €</p>
+                        </div>
+                        <div>
+                            <input type="number" min="0" class="form-control" value="0">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3">
+                    <div class="card-body d-flex justify-content-between">
+                        <div>
+                            <img src="url_vers_image_salle_reunion" alt="Salle de réunion" style="height: 50px;">
+                            <h5 class="card-title">Salle de réunion pour 6 personnes</h5>
+                            <p class="card-text">Tarif : 150 €</p>
+                        </div>
+                        <div>
+                            <input type="number" min="0" max="8" class="form-control" value="3">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section droite - Résumé -->
+            <div class="col-md-5">
+                <div class="card">
+                    <div class="card-body">
+                        <h3>Résumé</h3>
+                        <p>1 Demi-journée - Poste de travail en coworking</p>
+                        <p>3 heures - Salle de réunion pour 6 personnes</p>
+                        <hr>
+                        <p>Total HT : <strong>143,00 €</strong></p>
+                        <p>Total TTC : <strong>175,00 €</strong></p>
+                        <a href="#" class="btn btn-success btn-block">COMMANDER</a>
+                        <p class="text-muted mt-3">Paiement sécurisé</p>
+                    </div>
+                </div>
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <p>Vous souhaitez un abonnement personnalisé ?</p>
+                        <p>Appelez-nous : 04 51 58 08 05</p>
+                        <button class="btn btn-primary">Contact</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
