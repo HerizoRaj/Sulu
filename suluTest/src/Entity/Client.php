@@ -5,17 +5,38 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\Repository\ClientRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: ClientRepository::class)]
-class Client
+class Client implements PasswordAuthenticatedUserInterface
 {
+    public function __construct()
+    {
+        $this->token = bin2hex(random_bytes(32));
+        $this->notifications = new ArrayCollection();
+        $this->dateInscription = new \DateTime();
+    }
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
+    /**
+     * @Assert\NotBlank(message="Le numéro SIRET est obligatoire.")
+     * @Assert\Length(
+     *      exactMessage = "Le numéro SIRET doit contenir exactement 14 chiffres.",
+     *      min = 14,
+     *      max = 14
+     * )
+     * @Assert\Regex(
+     *     pattern="/^\d{14}$/",
+     *     message="Le numéro SIRET doit contenir uniquement des chiffres."
+     * )
+     */
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $siret = null;
 
@@ -25,7 +46,7 @@ class Client
     #[ORM\Column(nullable: true)]
     private ?float $tvaApplicable = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $raisonSociale = null;
 
     #[ORM\Column(length: 255)]
@@ -69,6 +90,15 @@ class Client
 
     #[ORM\Column(length: 255)]
     private ?string $password = null;
+
+    #[ORM\Column]
+    private ?bool $recevoir = null;
+
+    #[ORM\Column(length: 50)]
+    private ?string $civilite = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $region = null;
 
     public function getId(): ?int
     {
@@ -116,7 +146,7 @@ class Client
         return $this->raisonSociale;
     }
 
-    public function setRaisonSociale(string $raisonSociale): static
+    public function setRaisonSociale(?string $raisonSociale): static
     {
         $this->raisonSociale = $raisonSociale;
 
@@ -255,15 +285,14 @@ class Client
         return $this;
     }
 
-    public function getDateInscription(): ?\DateTimeInterface
+    public function getDateInscription(): \DateTimeInterface
     {
         return $this->dateInscription;
     }
 
-    public function setDateInscription(\DateTimeInterface $dateInscription): static
+    public function setDateInscription(\DateTimeInterface $dateInscription): self
     {
         $this->dateInscription = $dateInscription;
-
         return $this;
     }
 
@@ -279,6 +308,9 @@ class Client
         return $this;
     }
 
+    /**
+     * @see PasswordAuthenticatedUserInterface
+     */
     public function getPassword(): ?string
     {
         return $this->password;
@@ -287,6 +319,41 @@ class Client
     public function setPassword(string $password): static
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+    public function isRecevoir(): ?bool
+    {
+        return $this->recevoir;
+    }
+
+    public function setRecevoir(?bool $recevoir): static
+    {
+        $this->recevoir = $recevoir;
+        return $this;
+    }
+
+    public function getCivilite(): ?string
+    {
+        return $this->civilite;
+    }
+
+    public function setCivilite(string $civilite): static
+    {
+        $this->civilite = $civilite;
+
+        return $this;
+    }
+
+    public function getRegion(): ?string
+    {
+        return $this->region;
+    }
+
+    public function setRegion(string $region): static
+    {
+        $this->region = $region;
 
         return $this;
     }

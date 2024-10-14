@@ -8,31 +8,31 @@
     <div class="form-container">
         <div class="form-header">
             <img src="logo.png" alt="Panda Coworking" style="width: 120px;">
-            <h2>Inscription</h2>
-        </div>
-
-        <!-- Choix de genre -->
-        <div class="radio-group">
-            <label><input type="radio" name="gender" value="Madame"> Madame</label>
-            <label><input type="radio" name="gender" value="Monsieur"> Monsieur</label>
+            <h2>Inscrivez-vous</h2>
         </div>
 
         <!-- Formulaire -->
-        <form action="{{ path('app_inscription_client') }}">
+        {{ form_start(inscriptionForm, {
+                'action': path('app_inscription_client'),
+                'method': 'POST',
+                'attr':{'id':'clientForm'}
+            })
+        }}
+            <!-- Choix de genre -->
+            <div class="form-group">
+                {{ form_widget(inscriptionForm.civilite) }}
+                {{ form_errors(inscriptionForm.civilite) }}
+            </div>
             <div class="form-row">
                 <div class="form-group">
                     {{ form_label(inscriptionForm.prenom) }}
                     {{ form_widget(inscriptionForm.prenom) }}
                     <span class="text-danger text-left" data-page="1">{{form_errors(inscriptionForm.prenom) }}</span>
-                    <!--label for="firstname">Prénom*</label-->
-                    <!--input type="text" id="firstname" name="firstname" class="form-control" placeholder="Prénom" required-->
                 </div>
                 <div class="form-group">
                     {{ form_label(inscriptionForm.nom) }}
                     {{ form_widget(inscriptionForm.nom) }}
                     <span class="text-danger text-left" data-page="1">{{form_errors(inscriptionForm.nom) }}</span>
-                    <!--label for="lastname">Nom*</label>
-                    <input type="text" id="lastname" name="lastname" class="form-control" placeholder="Nom" required-->
                 </div>
             </div>
 
@@ -51,12 +51,14 @@
             </div>
             <div class="form-row">
                 <div class="form-group">
-                    <label for="password">Mot de passe*</label>
-                    <input type="password" id="password" name="password" class="form-control" placeholder="Mot de passe" required>
+                    {{ form_label(inscriptionForm.password) }}
+                    {{ form_widget(inscriptionForm.password) }}
+                    <span class="text-danger text-left" data-page="1">{{form_errors(inscriptionForm.password) }}</span>
                 </div>
                 <div class="form-group">
-                    <label for="confirm_password">Confirmation du mot de passe*</label>
-                    <input type="password" id="confirm_password" name="confirm_password" class="form-control" placeholder="Confirmez votre mot de passe" required>
+                    {{ form_label(inscriptionForm.confirm_password) }}
+                    {{ form_widget(inscriptionForm.confirm_password) }}
+                    <span class="text-danger text-left" id="password-error" style="display: none;">Les mots de passe ne correspondent pas.</span>
                 </div>
             </div>
 
@@ -80,8 +82,9 @@
                     <span class="text-danger text-left" data-page="1">{{form_errors(inscriptionForm.ville) }}</span>
                 </div>
                 <div class="form-group">
-                    <label for="region">Région*</label>
-                    <input type="text" id="region" name="region" class="form-control" placeholder="Région" required>
+                    {{ form_label(inscriptionForm.region) }}
+                    {{ form_widget(inscriptionForm.region) }}
+                    <span class="text-danger text-left" data-page="1">{{form_errors(inscriptionForm.region) }}</span>
                     {{ form_label(inscriptionForm.codePostal) }}
                     {{ form_widget(inscriptionForm.codePostal) }}
                     <span class="text-danger text-left" data-page="1">{{form_errors(inscriptionForm.codePostal) }}</span>
@@ -101,10 +104,44 @@
                 </div>
             </div>
 
+            <div class="form-row">
+                <div class="form-group">
+                    {{ form_label(inscriptionForm.numTva) }}
+                    {{ form_widget(inscriptionForm.numTva) }}
+                    <span class="text-danger text-left" data-page="1">{{form_errors(inscriptionForm.numTva) }}</span>
+                </div>
+                {#<div class="form-group">
+                    {{ form_label(inscriptionForm.tvaApplicable) }}
+                    {{ form_widget(inscriptionForm.tvaApplicable) }}
+                    <span class="text-danger text-left" data-page="1">{{form_errors(inscriptionForm.tvaApplicable) }}</span>
+                </div>#}
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    {{ form_label(inscriptionForm.siret) }}
+                    {{ form_widget(inscriptionForm.siret) }}
+                    <span class="text-danger text-left" data-page="1">{{form_errors(inscriptionForm.siret) }}</span>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    {{ form_label(inscriptionForm.ribIban) }}
+                    {{ form_widget(inscriptionForm.ribIban) }}
+                    <span class="text-danger text-left" data-page="1">{{form_errors(inscriptionForm.ribIban) }}</span>
+                </div>
+                <div class="form-group">
+                    {{ form_label(inscriptionForm.ribBic) }}
+                    {{ form_widget(inscriptionForm.ribBic) }}
+                    <span class="text-danger text-left" data-page="1">{{form_errors(inscriptionForm.ribBic) }}</span>
+                </div>
+            </div>
+
             <!-- Checkbox -->
             <div class="form-group">
                 <label>
-                    <input type="checkbox" name="consent" required>
+                    {{ form_widget(inscriptionForm.recevoir) }}
                     Je souhaite recevoir les offres et communications Panda Coworking
                 </label>
             </div>
@@ -113,6 +150,29 @@
             <button type="submit" class="btn btn-custom">CRÉER MON COMPTE</button>
 
             <p class="small-text">*Champs obligatoires</p>
-        </form>
+        {{ form_end(inscriptionForm) }}
     </div>
+
+    {% block javascripts %}
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                document.getElementById('client_recevoir').removeAttribute('required');
+
+                const form = document.getElementById('clientForm');
+                const password = document.getElementById('client_password');
+                const confirmPassword = document.getElementById('client_confirm_password');
+                const passwordError = document.getElementById('password-error');
+
+                form.addEventListener('submit', function(event) {
+                    // Vérification des mots de passe
+                    if (password.value !== confirmPassword.value) {
+                        event.preventDefault(); // Empêcher la soumission du formulaire
+                        passwordError.style.display = 'block'; // Afficher le message d'erreur
+                    } else {
+                        passwordError.style.display = 'none'; // Cacher le message si tout est bon
+                    }
+                });
+            });
+        </script>
+    {% endblock %}
 {% endblock %}

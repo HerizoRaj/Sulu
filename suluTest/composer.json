@@ -48,9 +48,11 @@
         "symfony/mailer": "^7.1",
         "symfony/monolog-bridge": "^7.1",
         "symfony/monolog-bundle": "^3.4",
+        "symfony/password-hasher": "7.1.*",
         "symfony/runtime": "^7.1",
         "symfony/security-bundle": "7.1.*",
-        "symfony/twig-bundle": "^7.1"
+        "symfony/twig-bundle": "^7.1",
+        "symfony/validator": "7.1.*"
     },
     "require-dev": {
         "jangregor/phpstan-prophecy": "^1.0",
