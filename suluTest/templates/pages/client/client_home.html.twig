@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil - Espace client{% endblock %}
+
+{% block content %}
+
+    {# Insertion du header #}
+    {{ include('pages/client/partials/_header.html.twig') }}
+    {# Insertion du menu latéral #}
+    {{ include ('pages/client/partials/_sidebar.html.twig') }}
+
+    <h2>Déverrouiller la porte</h2>
+    {#% if user.credits.available %#}
+    {% if true %}
+        <button id="unlock-door" onclick="unlockDoor()">Déverrouiller la porte</button>
+    {% else %}
+        <button disabled>Déverrouiller la porte</button>
+        <p>Vous n'avez aucun crédit disponible, rendez-vous <a href="{{ path('client_buy_credits') }}">ici</a> pour en acheter.</p>
+    {% endif %}
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        function unlockDoor() {
+            if (confirm("Utiliser un crédit pour déverrouiller la porte ?")) {
+                // Appel AJAX pour déverrouiller la porte
+                fetch("{{ path('app_client_unlock_door') }}", {
+                    method: 'POST'
+                }).then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert("Porte déverrouillée !");
+                        } else {
+                            alert("Erreur lors du déverrouillage.");
+                        }
+                    });
+            }
+        }
+    </script>
+{% endblock %}

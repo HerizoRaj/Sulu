@@ -10,15 +10,20 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-container">
-                    <h2 class="header-text">{{ content.login_title }}</h2> <!-- Titre de la section Connexion -->
-                    <form>
+                    <h2 class="header-text">{# {{ content.login_title }} #}Connectez-vous</h2> <!-- Titre de la section Connexion -->
+                    <!-- Formulaire -->
+                    {% if error %}
+                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
+                    <form action="{{ path('app_login') }}" method="POST">
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                         <div class="form-group">
                             <label for="email">E-mail*</label>
-                            <input type="email" class="form-control" id="email" placeholder="Entrez votre email" required>
+                            <input type="email" class="form-control" id="email" name="_username" placeholder="Entrez votre email" required>
                         </div>
                         <div class="form-group">
                             <label for="password">Mot de passe*</label>
-                            <input type="password" class="form-control" id="password" placeholder="Entrez votre mot de passe" required>
+                            <input type="password" class="form-control" id="password" name="_password" placeholder="Entrez votre mot de passe" required>
                         </div>
                         <a href="#">J'ai oublié mon mot de passe</a>
                         <button type="submit" class="btn btn-custom btn-block mt-4">Me connecter</button>
@@ -29,11 +34,63 @@
 
             <div class="col-md-6">
                 <div class="form-container">
-                    <h2 class="header-text">{{ content.signup_title }}</h2> <!-- Titre de la section Inscription -->
-                    <p>{{ content.signup_description|raw }}</p> <!-- Description de l'inscription -->
-                    <button class="btn btn-custom btn-block mt-4">Créer mon compte</button>
+                    <h2 class="header-text">{# {{ content.signup_title }} #}Inscrivez-vous</h2> <!-- Titre de la section Inscription -->
+                    <!-- Description de l'inscription -->
+                    <p>
+                        {# {{ content.signup_description|raw }} #}
+                        Consultez vos réservations disponibles<br>
+                        Gérer votre planing dans votre compte<br>
+                        Télécharger vos factures
+                    </p>
+                    <a class="btn btn-custom btn-block mt-4" href="{{ path('app_inscription_client') }}">Créer mon compte</a>
                 </div>
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('login-form');
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                fetch('{{ path('app_login') }}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-Token': '{{ csrf_token("authenticate") }}'
+                    },
+                    body: JSON.stringify({
+                        _username: document.getElementById('_username').value,
+                        _password: document.getElementById('_password').value
+                    })
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            window.location.href = data.redirect;
+                        } else {
+                            showErrors(data.errors);
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+            });
+
+            function showErrors(errors) {
+                const errorsDiv = document.createElement('div');
+                errorsDiv.className = 'error-message';
+
+                errors.forEach(error => {
+                    const p = document.createElement('p');
+                    p.textContent = error;
+                    errorsDiv.appendChild(p);
+                });
+
+                document.body.appendChild(errorsDiv);
+
+                setTimeout(() => {
+                    errorsDiv.remove();
+                }, 5000); // Supprime les erreurs après 5 secondes
+            }
+        });
+    </script>
 {% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil de {{ client.prenom }} {{ client.nom }}{% endblock %}
+
+{% block content %}
+    <h1>Profil de {{ client.prenom }} {{ client.nom }}</h1>
+
+    <div class="profile-info">
+        <h2>Informations personnelles</h2>
+        <p><strong>Civilité :</strong> {{ client.civilite }}</p>
+        <p><strong>Nom :</strong> {{ client.nom }}</p>
+        <p><strong>Prénom :</strong> {{ client.prenom }}</p>
+        <p><strong>Email principal :</strong> {{ client.emailPrincipal }}</p>
+        <p><strong>Email de facturation :</strong> {{ client.emailFacturation ?: 'Non renseigné' }}</p>
+        <p><strong>Téléphone :</strong> {{ client.tel }}</p>
+        <p><strong>Date d'inscription :</strong> {{ client.dateInscription ? client.dateInscription|date('d/m/Y') : 'Non renseignée' }}</p>
+
+        <h2>Adresse</h2>
+        <p><strong>Adresse :</strong> {{ client.adresse }}</p>
+        {% if client.adresse2 %}
+            <p><strong>Adresse complémentaire :</strong> {{ client.adresse2 }}</p>
+        {% endif %}
+        <p><strong>Code Postal :</strong> {{ client.codePostal }}</p>
+        <p><strong>Ville :</strong> {{ client.ville }}</p>
+        <p><strong>Région :</strong> {{ client.region }}</p>
+        <p><strong>Pays :</strong> {{ client.pays }}</p>
+
+        <h2>Informations d'entreprise</h2>
+        <p><strong>SIRET :</strong> {{ client.siret ?: 'Non renseigné' }}</p>
+        <p><strong>Numéro TVA :</strong> {{ client.numTva ?: 'Non renseigné' }}</p>
+        <p><strong>Raison sociale :</strong> {{ client.raisonSociale ?: 'Non renseignée' }}</p>
+
+        <h2>Informations bancaires</h2>
+        <p><strong>RIB / IBAN :</strong> {{ client.ribIban ?: 'Non renseigné' }}</p>
+        <p><strong>BIC :</strong> {{ client.ribBic ?: 'Non renseigné' }}</p>
+
+        <h2>Préférences</h2>
+        <p><strong>Recevoir les offres :</strong> {{ client.recevoir ? 'Oui' : 'Non' }}</p>
+    </div>
+
+    <a href="{{ path('app_client_edit_profil') }}" class="btn btn-primary">Modifier mon profil</a>
+{% endblock %}

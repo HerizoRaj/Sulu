@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Éditer Profil{% endblock %}
+
+{% block content %}
+    <h1>Édition du Profil</h1>
+
+    {{ form_start(form) }}
+    <div class="form-group">
+        {{ form_label(form.nom, 'Nom') }}
+        {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.nom) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.prenom, 'Prénom') }}
+        {{ form_widget(form.prenom, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.prenom) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.emailPrincipal, 'Adresse email') }}
+        {{ form_widget(form.emailPrincipal, {'attr': {'class': 'form-control', 'readonly': true}}) }}
+        {{ form_errors(form.emailPrincipal) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.tel, 'Téléphone') }}
+        {{ form_widget(form.tel, {'attr': {'class': 'form-control' }}) }}
+        {{ form_errors(form.tel) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.adresse, 'Adresse') }}
+        {{ form_widget(form.adresse, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.adresse) }}
+    </div>
+
+    {# Autres champs nécessaires, avec valeurs par défaut issues de app.user #}
+
+    <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+    {{ form_end(form) }}
+{% endblock %}

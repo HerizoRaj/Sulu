@@ -26,7 +26,13 @@ class Facture
     private ?Client $client = null;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private ?string $type = null; // ex: abonnement, achat crédit
+    private ?string $type = null;
+
+    #[ORM\Column]
+    private ?float $tva = null;
+
+    #[ORM\Column]
+    private ?float $montantTTC = null; // ex: abonnement, achat crédit
 
     public function getId(): ?int
     {
@@ -77,6 +83,30 @@ class Facture
     public function setType(string $type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function getTva(): ?float
+    {
+        return $this->tva;
+    }
+
+    public function setTva(float $tva): static
+    {
+        $this->tva = $tva;
+
+        return $this;
+    }
+
+    public function getMontantTTC(): ?float
+    {
+        return $this->montantTTC;
+    }
+
+    public function setMontantTTC(float $montantTTC): static
+    {
+        $this->montantTTC = $montantTTC;
 
         return $this;
     }

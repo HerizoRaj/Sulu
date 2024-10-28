@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes factures - Espace Client{% endblock %}
+
+{% block content %}
+    <h1>Mes Factures</h1>
+
+    {% if factures is empty %}
+        <p>Aucune facture disponible pour le moment.</p>
+    {% else %}
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Type</th>
+                <th>Date</th>
+                <th>Montant TTC</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for facture in factures %}
+                <tr>
+                    <td>{{ facture.id }}</td>
+                    <td>{{ facture.type }}</td>
+                    <td>{{ facture.date|date('d/m/Y') }}</td>
+                    <td>{{ facture.montantTTC }} €</td>
+                    <td>
+                        <a href="{{ path('app_facture', { id: facture.id }) }}" target="_blank">
+                            Voir la facture
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}

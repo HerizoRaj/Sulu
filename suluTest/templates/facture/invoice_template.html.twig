@@ -1,0 +1,84 @@
+{# templates/facture/invoice_template.html.twig #}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Facture - {{ facture.id }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1, h2, h3 {
+            text-align: center;
+        }
+        .header, .client-info, .footer {
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 8px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .total {
+            text-align: right;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <h1>Facture</h1>
+    <p><strong>Numéro de facture :</strong> {{ facture.id }}</p>
+    <p><strong>Date :</strong> {{ facture.date|date('d/m/Y') }}</p>
+    <p><strong>Type :</strong> {{ facture.type }}</p>
+</div>
+
+<div class="client-info">
+    <h2>Informations Client</h2>
+    <p><strong>Nom :</strong> {{ facture.client.civilite }} {{ facture.client.nom }} {{ facture.client.prenom }}</p>
+    <p><strong>Adresse :</strong> {{ facture.client.adresse }} {{ facture.client.adresse2 }}</p>
+    <p><strong>Code Postal :</strong> {{ facture.client.codePostal }}</p>
+    <p><strong>Ville :</strong> {{ facture.client.ville }}</p>
+    <p><strong>Pays :</strong> {{ facture.client.pays }}</p>
+    <p><strong>Téléphone :</strong> {{ facture.client.tel }}</p>
+    <p><strong>Email :</strong> {{ facture.client.emailPrincipal }}</p>
+    {% if facture.client.siret %}
+        <p><strong>SIRET :</strong> {{ facture.client.siret }}</p>
+    {% endif %}
+    {% if facture.client.numTva %}
+        <p><strong>Numéro de TVA :</strong> {{ facture.client.numTva }}</p>
+    {% endif %}
+</div>
+
+<h2>Détails de la Facture</h2>
+<table>
+    <tr>
+        <th>Description</th>
+        <th>Montant HT</th>
+        <th>TVA</th>
+        <th>Montant TTC</th>
+    </tr>
+    <tr>
+        <td>{{ facture.type }}</td>
+        <td>{{ facture.montant }} €</td>
+        <td>{{ facture.tva }} €</td>
+        <td>{{ facture.montantTTC }} €</td>
+    </tr>
+</table>
+
+<h3 class="total">Total TTC : {{ facture.montantTTC }} €</h3>
+
+<div class="footer">
+    <p>Merci de votre confiance.</p>
+</div>
+</body>
+</html>

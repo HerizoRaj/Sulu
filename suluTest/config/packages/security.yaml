@@ -9,6 +9,10 @@ security:
     providers:
         sulu:
             id: sulu_security.user_provider
+        app_client_provider:
+            entity:
+                class: App\Entity\Client  # Entité correspondant à votre client
+                property: emailPrincipal
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
@@ -23,6 +27,7 @@ security:
         - { path: ^/admin/$, roles: PUBLIC_ACCESS }
         - { path: ^/admin/p/, roles: PUBLIC_ACCESS }
         - { path: ^/admin, roles: ROLE_USER }
+        #- { path: ^/facture, roles: ROLE_USER }
 
     firewalls:
         dev:
@@ -47,20 +52,20 @@ security:
                 success_handler: sulu_security.two_factor_authentication_success_handler
                 failure_handler: sulu_security.two_factor_authentication_failure_handler
 
-       #website:
-       #    pattern: ^/
-       #    lazy: true
-       #    provider: sulu
+        website:
+           pattern: ^/
+           lazy: true
+           provider: app_client_provider
        #    # The login and logout routes need to be created.
        #    # For an advanced user management with registration and opt-in emails have a look at the:
        #    # https://github.com/sulu/SuluCommunityBundle
        #    # Also have a look at the user context based caching when you output user role specific data
        #    # https://docs.sulu.io/en/2.2/cookbook/user-context-caching.html
-       #    form_login:
-       #        login_path: login
-       #        check_path: login
-       #    logout:
-       #        path: logout
+           form_login:
+               login_path: app_login
+               check_path: app_login
+           logout:
+               path: app_logout
        #        target: /
        #    remember_me:
        #        secret:   "%kernel.secret%"

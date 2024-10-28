@@ -5,7 +5,7 @@
           http://schemas.sulu.io/template/template-1.0.xsd">
     <key>login</key>
     <view>pages/login</view>
-    <controller>Sulu\Bundle\WebsiteBundle\Controller\DefaultController::indexAction</controller>
+    <controller>App\Controller\ClientController::login</controller>
     <meta>
         <title>Login</title>
     </meta>
